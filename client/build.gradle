@@ -1,0 +1,38 @@
+plugins { id 'net.fabricmc.fabric-loom' version '1.16.3' }
+def releaseVersion = providers.gradleProperty('modVersion').getOrElse(file('../VERSION').text.trim())
+version = "${releaseVersion}+mc26.2"
+group = 'org.modlistdiscovery'
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'com.mojang:minecraft:26.2'
+    implementation 'net.fabricmc:fabric-loader:0.19.5'
+    implementation 'net.fabricmc.fabric-api:fabric-api:0.155.2+26.2'
+    implementation include('com.google.code.gson:gson:2.13.2')
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+java { toolchain { languageVersion = JavaLanguageVersion.of(25) }; withSourcesJar() }
+tasks.withType(JavaCompile).configureEach { options.release = 25; options.encoding = 'UTF-8' }
+processResources { inputs.property 'version', project.version; filesMatching('fabric.mod.json') { expand version: project.version } }
+test { useJUnitPlatform(); inputs.property "controlPlaneBinary", System.getenv("MLD_SERVER_BINARY") ?: "" }
+
+// The reported client version must agree with the tag and fabric.mod.json.
+def generatedVersionDir = layout.buildDirectory.dir('generated/sources/version/java')
+tasks.register('generateBuildVersion') {
+    inputs.property('releaseVersion', releaseVersion)
+    outputs.dir(generatedVersionDir)
+    doLast {
+        def target = generatedVersionDir.get().file('org/modlistdiscovery/client/core/BuildVersion.java').asFile
+        target.parentFile.mkdirs()
+        target.text = """package org.modlistdiscovery.client.core;
+public final class BuildVersion {
+    private BuildVersion() {}
+    public static final String VERSION = "${releaseVersion}";
+}
+"""
+    }
+}
+sourceSets.main.java.srcDir(generatedVersionDir)
+tasks.named('compileJava') { dependsOn('generateBuildVersion') }
+tasks.named('sourcesJar') { dependsOn('generateBuildVersion') }

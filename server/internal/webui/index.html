@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>MOD 环境管家 · Mod List Discovery</title>
+    <link rel="stylesheet" href="/assets/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script src="/assets/vendor/bootstrap.min.js" defer></script>
+    <script src="/assets/components.js" defer></script>
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到主要内容</a>
+    <aside id="sidebar" class="sidebar">
+      <a class="brand" href="/admin/"
+        ><span class="brand-mark" aria-hidden="true">M</span
+        ><span>MOD 环境管家<small>MOD LIST DISCOVERY</small></span></a
+      >
+      <div class="nav-caption">工作空间</div>
+      <nav aria-label="主导航">
+        <a href="/admin/" data-view="dashboard"
+          ><span aria-hidden="true">◈</span>工作台</a
+        >
+        <a href="/admin/servers" data-view="servers"
+          ><span aria-hidden="true">▤</span>我的服务器</a
+        >
+        <a href="/admin/artifacts" data-view="artifacts"
+          ><span aria-hidden="true">▦</span>MOD 文件库</a
+        >
+        <a href="/admin/releases" data-view="releases"
+          ><span aria-hidden="true">◷</span>环境版本</a
+        >
+        <a href="/admin/clients" data-view="clients"
+          ><span aria-hidden="true">♧</span>玩家设备与邀请</a
+        >
+        <a href="/admin/settings" data-view="settings"
+          ><span aria-hidden="true">⚙</span>系统设置</a
+        >
+      </nav>
+      <div class="sidebar-help">
+        <span class="eyebrow">第一次使用？</span
+        ><strong>从一份 MOD 清单开始</strong>
+        <p>跟着四个步骤，把统一的游戏环境交给玩家。</p>
+        <a href="/admin/guide"
+          >查看入门指南 <span aria-hidden="true">↗</span></a
+        >
+      </div>
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>管理控制台
+        <span id="version">0.1.0</span>
+      </div>
+    </aside>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button
+            id="menu-toggle"
+            class="btn btn-light mobile-menu"
+            type="button"
+            aria-controls="sidebar"
+            aria-expanded="false"
+            aria-label="展开导航"
+          >
+            ☰</button
+          ><span id="breadcrumb">工作空间 / 工作台</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <a href="/admin/guide" class="help-link">使用帮助</a
+          ><span class="avatar" aria-hidden="true">A</span
+          ><span class="admin-label">管理员</span
+          ><button
+            id="logout"
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+          >
+            退出登录
+          </button>
+        </div>
+      </header>
+      <main id="main">
+        <div id="notice" class="page-notice" role="alert" hidden></div>
+        <div id="content" tabindex="-1" aria-busy="true">
+          <div class="loading-state">
+            <span class="spinner-border text-primary" aria-hidden="true"></span>
+            <p>正在加载工作空间…</p>
+          </div>
+        </div>
+        <noscript>请启用浏览器 JavaScript 后使用管理控制台。</noscript>
+      </main>
+      <footer class="page-footer">
+        MOD LIST DISCOVERY <span>统一配置，安心开玩。</span>
+      </footer>
+    </div>
+    <div
+      id="toast-region"
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      aria-live="polite"
+    ></div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+/dist/
+/data/
+/.tools/
+**/.gradle/
+**/build/
+*.log
+/client/run/
+
+# Local diagnostic screenshots are not published documentation.
+/docs/validation/
+**/__pycache__/

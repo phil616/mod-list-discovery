@@ -1,0 +1,27 @@
+server:
+  listen: 127.0.0.1:8080
+  public_base_url: http://127.0.0.1:8080
+  data_dir: ./data
+  trusted_reverse_proxy: false
+security:
+  session_ttl: 12h
+  enrollment_token_ttl: 24h
+  artifact_url_ttl: 5m
+  max_upload_size: 536870912
+  allow_private_import_urls: false
+storage:
+  type: local
+  s3:
+    region: us-east-1
+    endpoint: ""
+    bucket: ""
+    prefix: mod-list-discovery/
+    access_key_env: MLD_S3_ACCESS_KEY
+    secret_key_env: MLD_S3_SECRET_KEY
+    force_path_style: false
+  oss:
+    endpoint: ""
+    bucket: ""
+    prefix: mod-list-discovery/
+    access_key_env: MLD_OSS_ACCESS_KEY
+    secret_key_env: MLD_OSS_SECRET_KEY

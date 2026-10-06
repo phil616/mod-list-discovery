@@ -1,0 +1,1 @@
+{"schemaVersion":1,"id":"mod-list-discovery","version":"${version}","name":"Mod List Discovery","description":"Signed server mod environments with safe, restart-based synchronization.","environment":"client","entrypoints":{"client":["org.modlistdiscovery.client.ModListDiscoveryClient"]},"depends":{"fabricloader":">=0.19.0","minecraft":"~26.2","java":">=25","fabric-api":"*"}}
